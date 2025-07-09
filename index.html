@@ -57,11 +57,44 @@
             color: #e74c3c;
             margin: 12px 0 5px 0;
         }
+        .answer-container {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 1px solid #d1fae5;
+            border-radius: 8px;
+            padding: 5px 15px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .answer-container:hover {
+            background: linear-gradient(135deg, #dcffe4 0%, #c6f6d5 100%);
+            transform: translateX(5px);
+        }
+        .answer-prompt {
+            color: #10b981;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+        }
+        .answer-prompt:before {
+            content: "✨";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
         .answer {
-            color: #27ae60;
+            color: #0f9d58;
             margin-left: 20px;
-            padding-left: 10px;
-            border-left: 2px solid #2ecc71;
+            padding: 10px 15px;
+            background-color: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid #10b981;
+            border-radius: 0 8px 8px 0;
+            display: none;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease;
+        }
+        .show-answer .answer {
+            display: block;
         }
         
         /* 数表规律动画 */
@@ -190,8 +223,12 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         
-        /* 罗伯法填数部分 - 完全按照图片样式设计 */
+        /* 罗伯法填数部分 */
         .rober-method-container {
             background-color: white;
             padding: 20px;
@@ -346,17 +383,23 @@
         </div>
         
         <div class="example">
-            <div class="question">一个表格中，每一行的第一个数都比上一行多 1，其余数字依次增加。
-问：第 7 行的第一个数是多少？</div>
-            <div class="answer">7</div>
+            <div class="question">一个表格中，每一行的第一个数都比上一行多 1，其余数字依次增加。问：第 7 行的第一个数是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">7</div>
+            </div>
             
-            <div class="question">某表格中，每一列的数字都比上一行增加 3。
-问：第 2 列第 5 行的数是多少？</div>
-            <div class="answer">15</div>
+            <div class="question">第1列从2开始，每行加4；每列右移加2。问：第4行第3列是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">18</div>
+            </div>
             
-            <div class="question">某表格中，第1列从 2 开始，每向下一行加 4。
-问：第 4 行第 3 列的数是多少，若每列之间加 2？</div>
-            <div class="answer">18</div>
+            <div class="question">某表格第1行第1列是1，每列向右加2，每行向下加10。问第3行第4列是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">27</div>
+            </div>
         </div>
         
         <h3>2、交叉规律：特定位置运算关系</h3>
@@ -379,30 +422,23 @@
         </div>
         
         <div class="example">
-            <div class="question">某表格中，每个格子里的数满足：
-第1行第1列是 2，
-第2行第2列是 4，
-第3行第3列是 6。
-
-问：这个表格中的数可能满足什么运算规律？
-再根据该规律，求：第4行第4列的数是多少？</div>
-            <div class="answer">16</div>
+            <div class="question">表格中第3行第2列是 5，第5行第4列是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">9</div>
+            </div>
             
-            <div class="question">已知某表格中的数值等于"行号 + 列号"，
-表格中第3行第2列是 5，第5行第4列是多少？</div>
-            <div class="answer">9</div>
+            <div class="question">某表格中，每个数 = 行号 × 列号。问：第3行第6列的数是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">18</div>
+            </div>
             
-            <div class="question">某表格中满足如下条件：
-
-第2行第3列是 5，
-
-第3行第4列是 7，
-
-第4行第5列是 9，
-
-问：这个表格中每个数是由行列如何运算得到的？
-再求第6行第7列的数。</div>
-            <div class="answer">13</div>
+            <div class="question">某表格中：若行号为偶数，则数 = 行号 + 列号；若行为奇数，则数 = 行号 × 列号。问：第2行第3列是多少？第3行第2列是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">5,6</div>
+            </div>
         </div>
         
         <h3>3、对称和：对称位置和相等</h3>
@@ -425,31 +461,23 @@
         </div>
         
         <div class="example">
-            <div class="question">一个方阵中，第1行第3列是7，第3行第1列是多少？
-已知：对称位置的数值和相等。</div>
-            <div class="answer">7</div>
+            <div class="question">一个表格中，任意对称位置 (i,j) 与 (j,i) 的和为12。已知：第2行第4列是5，求第4行第2列是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">7</div>
+            </div>
             
-            <div class="question">一个表格中，任意对称位置 (i, j) 与 (j, i) 的和为 12。
-已知：第2行第4列是5，求第4行第2列的数。</div>
-            <div class="answer">7</div>
+            <div class="question">某方阵中，对称位置的和恒为20。已知：(1,3)=8，(2,4)=9，(4,2)=11，问：(3,1) 的数是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">12</div>
+            </div>
             
-            <div class="question">某方阵中，对称位置的和恒为 20。
-已知：(1,3) = 8，(2,4) = 9，(4,2) = 11
-问：(3,1) 的数是多少？</div>
-            <div class="answer">12</div>
-            
-            <div class="question">某 4×4 方阵中，主对角线之和为 30，已知：
-
-(1,1) = 6
-
-(2,2) = 7
-
-(3,3) = 8
-
-(4,4) = ?
-
-求 (4,4)</div>
-            <div class="answer">9</div>
+            <div class="question">一个正方形数阵中，所有位置满足：(i,j)=(j,i)，已知：(1,2)=4，(2,1)=？，(3,3)=9，(4,4)=？，若(4,4)=2×(1,2)，求(4,4)</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">8</div>
+            </div>
         </div>
     </div>
     
@@ -471,23 +499,23 @@
         </div>
         
         <div class="example">
-            <div class="question">在数字集合 {1, 3, 5, 7, 9} 中，选任意 3 个组成一个奇数，最大是多少？</div>
-            <div class="answer">975</div>
+            <div class="question">从 0～9 中选出 4 个不同数字，组成一个最小的四位数，要求"3在十位"，数字不能重复，求最小值。</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">1032</div>
+            </div>
             
-            <div class="question">从 0～9 中选出 4 个不同数字，组成一个最小的四位数，其中：
-
-数字 3 必须在十位上
-
-数字不能重复
-
-问：能组成的最小四位数是多少？</div>
-            <div class="answer">1032</div>
-            <div class="question">使用数字 1～9 中的任意 4 个不同数字，分别组成两个两位数，使差值最大，问：
-
-哪两个数是差值最大的一组？
-
-最大差值是多少？</div>
-            <div class="answer">略</div>
+            <div class="question">从 {2, 4, 5, 7, 9} 中选出 2 个不同的数字，组成一个最大两位数，且十位必须是偶数。问是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">49</div>
+            </div>
+            
+            <div class="question">从集合 {0, 1, 2, 3, 4, 5, 6} 中选出 3 个不同的数字，组成一个最小的三位奇数。问是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">103</div>
+            </div>
         </div>
         
         <h3>2、和同近积大：两数越接近积越大</h3>
@@ -504,17 +532,23 @@
         </div>
         
         <div class="example">
-            <div class="question">某两数和为 40，它们差最小时的乘积是多少？</div>
-            <div class="answer">400</div>
-            
-            <div class="question">两数和为 50，乘积要最大，应选哪两个数？</div>
-            <div class="answer">25,25</div>
-            
-            <div class="question">和为 30，选择两个不同整数，使乘积最大。积是多少？</div>
-            <div class="answer">14,16</div>
+            <div class="question">和为 31，哪两个整数使乘积最大？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">15 和 16</div>
+            </div>
             
             <div class="question">两个整数和为 40，乘积为 351。问：这两数是接近的，还是相差较大？</div>
-            <div class="answer">它们相差较大</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">相差较大</div>
+            </div>
+            
+            <div class="question">两数和为 100，一个是 49，另一个是多少？乘积是多少？和最大可能积比较结果？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">51，2450，接近，乘积接近最大</div>
+            </div>
         </div>
         
         <h3>3、算式最值：合理拆分数字</h3>
@@ -532,14 +566,23 @@
         </div>
         
         <div class="example">
-            <div class="question">某数被拆成两个数，乘积为 56，和为 14。请问这两个数是否接近？</div>
-            <div class="answer">不接近</div>
+            <div class="question">将 16 拆为两个正数，使乘积最大，这个最大乘积是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">64</div>
+            </div>
             
-            <div class="question">和为 30，两数拆分后乘积为 200，这是否是最大乘积？</div>
-            <div class="answer">不是最大乘积</div>
+            <div class="question">拆30为 10 和 20，是否为最大？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">不是最大。差距越大，乘积越小。</div>
+            </div>
             
-            <div class="question">把 9 拆成两个数（可以是小数），使乘积最大，这两个数应是多少？</div>
-            <div class="answer">4.5、4.5</div>
+            <div class="question">把 11 拆成两个整数，使乘积最大是多少？如果允许小数呢？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">整数最大乘积是30，小数情况下更大为30.25</div>
+            </div>
         </div>
     </div>
     
@@ -576,21 +619,40 @@
         
         <div class="example">
             <div class="question">一个三阶幻方的幻和是 18，它的中心数是多少？</div>
-            <div class="answer">6</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">6</div>
+            </div>
             
-            <div class="question">一个三阶幻方，某一行的三个数为：4, 6, 10，请判断：
-
-（1）这组数能出现在同一个三阶幻方的一行吗？
-（2）如果能，请计算中心数与幻和。</div>
-            <div class="answer">不能</div>
+            <div class="question">某一行的三个数为 4，6，10，能否出现在同一个三阶幻方的一行？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">不能</div>
+            </div>
             
-            <div class="question">一个三阶幻方中心数为 7，请问它的幻和是多少？
-若一行已知为：6，7，___，请你填出最后一个数。</div>
-            <div class="answer">8</div>
+            <div class="question">三阶幻方中的一组行为：2，7，6，是否合理？求幻和、中心数。</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">15,5</div>
+            </div>
         </div>
         
         <h3>2、填数规则：罗伯法填数</h3>
-    
+        <div class="rober-method-container">
+            <div class="rober-header">
+                <div class="number-box">
+                    <div class="number-item">1</div>
+                    <div class="number-item">2</div>
+                    <div class="number-item">3</div>
+                    <div class="number-item">4</div>
+                    <div class="number-item">5</div>
+                    <div class="number-item">6</div>
+                    <div class="number-item">7</div>
+                    <div class="number-item">8</div>
+                    <div class="number-item">9</div>
+                </div>
+                <div class="rober-title">罗伯法填数步骤</div>
+            </div>
             
             <div class="rober-animation-area">
                 <div class="rober-magic-grid" id="magicSquare">
@@ -612,13 +674,22 @@
         
         <div class="example">
             <div class="question">罗伯法填三阶幻方时，第一步"1"应填在________位置。</div>
-            <div class="answer"> 第一行中间格（或"上中格"）</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">第一行中间格，即：(1,2)</div>
+            </div>
             
             <div class="question">将1~9按罗伯法填入3×3方格中，请问"5"应填在哪个格子？（用行列坐标回答）</div>
-            <div class="answer"> 第2行第2列（中心格）</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">第2行第2列（中心格）</div>
+            </div>
             
             <div class="question">按罗伯法填数，若第一步填在第一行最右边（非中间），会不会影响最终能否形成幻方？</div>
-            <div class="answer">会</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">会</div>
+            </div>
         </div>
         
         <h3>3、对比求数：用幻和求缺失数</h3>
@@ -641,15 +712,23 @@
         </div>
         
         <div class="example">
-            <div class="question">某行三个格子中，已知两个数为：4 和 9，幻和为 15，求第三个数。</div>
-            <div class="answer">2</div>
+            <div class="question">一个三阶幻方中，第一列数字为：8、1、？，幻和为 15。求第三个数。</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">6</div>
+            </div>
             
-            <div class="question">一个三阶幻方中，第一列数字为 8、1、？，幻和为 15。求问第三个数是几？</div>
-            <div class="answer">6</div>
+            <div class="question">三阶幻方中一行的数为 A、B、5，且幻和为 15。 如果 A 比 B 小 2，求 A 与 B 的值。</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">A4，B6</div>
+            </div>
             
-            <div class="question">三阶幻方中一行的数为 A、B、5，且幻和为 15。
-如果 A 比 B 小 2，求 A 与 B 的值。</div>
-            <div class="answer">A4，B6</div>
+            <div class="question">一行三格为：x，x+1，x+2，构成三阶幻方一行，问 x 是多少？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">4</div>
+            </div>
         </div>
     </div>
 
@@ -812,6 +891,16 @@
         });
         
         autoBtn.addEventListener('click', autoPlay);
+
+        // 答案显示功能
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                const container = e.target.closest('.answer-container');
+                if(container) {
+                    container.classList.toggle('show-answer');
+                }
+            });
+        });
     </script>
 </body>
 </html>
